@@ -1,25 +1,24 @@
-// ***********************************************
-// This example commands.js shows you how to
-// create various custom commands and overwrite
-// existing commands.
-//
-// For more comprehensive examples of custom
-// commands please read more here:
-// https://on.cypress.io/custom-commands
-// ***********************************************
-//
-//
-// -- This is a parent command --
-// Cypress.Commands.add('login', (email, password) => { ... })
-//
-//
-// -- This is a child command --
-// Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })
-//
-//
-// -- This is a dual command --
-// Cypress.Commands.add('dismiss', { prevSubject: 'optional'}, (subject, options) => { ... })
-//
-//
-// -- This will overwrite an existing command --
-// Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+Cypress.Commands.add('ComandoPersonalizationDeSubmiteFormulario', (pessoa = {
+    firstName: 'DefaultErick',
+    lastName: 'DefaultSilva',
+    email: 'default@gmail.com',
+    text: 'default text',
+    phone: '2525252525',
+    product: 'Blog'
+}) => {
+    cy.get('#firstName').type(pessoa.firtName)
+    cy.get('#lastName').type(pessoa.lastName)
+    cy.get('#email').type(pessoa.email)
+    cy.get('#open-text-area').type(pessoa.text, { delay: 0 })
+    cy.get('#phone').type(pessoa.phone)
+
+    if (pessoa.product === '') {
+        cy.get('#product option[value=""]')
+            .should('be.disabled')
+            .and('have.text', 'Selecione')
+    } else {
+        cy.get('#product').select(pessoa.product)
+    }
+
+    cy.get('button[type="submit"]').click()
+})
