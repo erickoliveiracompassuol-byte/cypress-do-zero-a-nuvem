@@ -1,139 +1,254 @@
+:root {
+    --primary: #4f46e5;
+    --primary-hover: #4338ca;
+    --primary-light: #eef2ff;
+    --card-bg: #ffffff;
+    --text-heading: #0f172a;
+    --text-body: #334155;
+    --text-muted: #64748b;
+    --border-color: #cbd5e1;
+    --border-focus: #6366f1;
+    --radius: 14px;
+}
+
 * {
     margin: 0;
     padding: 0;
-    font-family: sans-serif;
+    box-sizing: border-box;
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
-#title {
-    color: #fec7d7;
-    text-align: center;
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
-
-#subtitle {
-    color: #fec7d7;
-    text-align: center;
+body {
+    background: radial-gradient(circle at 50% 10%, #1e1b4b 0%, #0b0f19 80%);
+    font-size: 1rem;
+    color: var(--text-body);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 2.5rem 1rem;
+    line-height: 1.5;
 }
 
 fieldset {
     border: 0;
 }
 
-body {
-    background-color: #181818;
-    font-size: 1em;
-    color: #272343;
-    justify-content: center;
-    margin: auto;
-    display: grid;
+#title {
+    color: #f8fafc;
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    text-align: center;
+    margin-top: 0.5rem;
+    margin-bottom: 0.35rem;
 }
 
-input, select, textarea, button {
-    border-radius: 5px;
+#subtitle {
+    color: #94a3b8;
+    font-size: 0.95rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+/* Alert messages - Preservando display: none para os testes com .invoke() e cy.clock() */
+.success, .error {
+    display: none;
+    width: 100%;
+    max-width: 580px;
+    padding: 0.875rem 1.25rem;
+    border-radius: 10px;
+    font-size: 0.925rem;
+    text-align: center;
+    margin-bottom: 1rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 0.25s ease-out;
+}
+
+.success {
+    background-color: #ecfdf5;
+    color: #065f46;
+    border: 1px solid #a7f3d0;
+}
+
+.error {
+    background-color: #fef2f2;
+    color: #991b1b;
+    border: 1px solid #fecaca;
+}
+
+/* Form Card */
+#white-background {
+    background: var(--card-bg);
+    width: 100%;
+    max-width: 580px;
+    padding: 2.25rem;
+    border-radius: var(--radius);
+    box-shadow: 0 20px 35px -5px rgba(0, 0, 0, 0.35), 0 10px 15px -5px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .field {
-    margin-bottom: 1em;
+    margin-bottom: 1.25rem;
 }
 
 .field label {
-    margin-bottom: 0.2em;
-    color: #272343;
+    margin-bottom: 0.35rem;
+    color: var(--text-heading);
+    font-size: 0.875rem;
+    font-weight: 600;
     display: block;
+}
+
+/* Layout de 2 colunas para campos agrupados */
+fieldset.group {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
 }
 
 fieldset.group .field {
-    float: left;
-    margin-right: 1em;
+    flex: 1;
+    margin-bottom: 0;
 }
 
-.field input[type="text"], .field input[type="email"], .field input[type="number"] {
-    width: 160px;
+/* Inputs, Selects e Textarea */
+.field input[type="text"],
+.field input[type="email"],
+.field input[type="number"],
+.field select,
+.field textarea {
+    width: 100%;
+    padding: 0.7rem 0.9rem;
+    font-size: 0.95rem;
+    color: var(--text-heading);
+    background-color: #f8fafc;
+    border: 1.5px solid var(--border-color);
+    border-radius: 8px;
+    outline: none;
+    transition: all 0.2s ease-in-out;
 }
 
-.field input[type="text"], .field input[type="email"], .field input[type="number"], .field select, .field textarea {
-    padding: 0.2em;
-    border: 1px solid #272343;
-    box-shadow: 2px 2px 2px #181818;
-    display: block;
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+    background-color: #ffffff;
+    border-color: var(--border-focus);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.18);
 }
 
 textarea {
     width: 100%;
-    height: 100px;
+    min-height: 110px;
+    resize: vertical;
 }
 
-.field select option {
-    padding-right: 1em;
+/* Opções de Atendimento e Meio de Contato */
+#support-type label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    margin-right: 1.25rem;
+    font-size: 0.875rem;
+    cursor: pointer;
 }
 
-.field input:focus, .field select:focus, .field textarea:focus {
-    background-color: #fec7d7;
-}
-
-.button {
-    font-size: 1.2em;
-    background: #0e172c;
-    border: #181818 solid 2px;
-    color: #fffffe;
-    padding: 0.8em 1.2em;
-    font-weight: bold;
-    margin: auto;
+#support-type > label:first-child,
+#check > label:first-child {
     display: block;
-    margin-top: 20px;
+    margin-bottom: 0.5rem;
+    cursor: default;
+}
+
+#check label:not(:first-child) {
+    display: inline-block;
+    margin-right: 1.25rem;
+    margin-left: 0.25rem;
+    font-size: 0.875rem;
+    cursor: pointer;
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+    accent-color: var(--primary);
+    width: 1.05rem;
+    height: 1.05rem;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+/* File Upload */
+#file-upload {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+#file-upload::file-selector-button {
+    background: var(--primary-light);
+    color: var(--primary);
+    border: none;
+    padding: 0.5rem 0.85rem;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-right: 0.75rem;
+    transition: background 0.2s ease-in-out;
+}
+
+#file-upload::file-selector-button:hover {
+    background: #e0e7ff;
+}
+
+/* Botão Enviar */
+.button {
+    font-size: 1rem;
+    background: linear-gradient(135deg, #4f46e5, #6366f1);
+    border: none;
+    border-radius: 8px;
+    color: #ffffff;
+    padding: 0.85rem 1.5rem;
+    font-weight: 600;
+    width: 100%;
+    margin-top: 1.25rem;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
+    transition: all 0.2s ease-in-out;
 }
 
 .button:hover {
-    background: #fffffe;
-    border: #0e172c solid 2px;
-    color: #0e172c;
+    background: linear-gradient(135deg, #4338ca, #4f46e5);
+    box-shadow: 0 6px 16px rgba(79, 70, 229, 0.35);
+    transform: translateY(-1px);
+    color: #ffffff;
 }
 
-#check {
-    display: inline-block;
+.button:active {
+    transform: translateY(0);
 }
 
-#support-type label, #check label {
-    margin-bottom: 0.4em;
-}
-
-#check label {
-    display: inline-block;
-    margin-right: 1em;
-}
-
-#white-background {
-    background:#fec7d7;
-    display: inline-block;
-    padding: 20px;
-    border-radius: 10px;
-}
-
-input[type="radio"] {
-    margin-right: 5px;
-}
-
-.success {
-    background-color: #d9d4e7;
-}
-
-.error {
-    background-color: #a786df;
-}
-
-.success, .error {
-    display: none;
-    color: #181818;
-    padding: 8px 10px;
-    border-radius: 5px;
-    margin-bottom: 12px;
+/* Política de Privacidade */
+#privacy {
+    margin-top: 1.25rem;
     text-align: center;
 }
 
+#privacy a {
+    color: var(--primary);
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.15s ease-in-out;
+}
+
+#privacy a:hover {
+    color: var(--primary-hover);
+    text-decoration: underline;
+}
+
 .required-mark {
-    color: #2e2e2e;
-    font-size: 0.9em;
+    color: #ef4444;
+    font-size: 0.825rem;
 }
 
 .phone-label-span {
@@ -144,40 +259,29 @@ input[type="radio"] {
     display: none;
 }
 
-#privacy {
-    margin-top: 20px;
-    text-align: center;
-}
+/* Responsividade */
+@media (max-width: 520px) {
+    fieldset.group {
+        flex-direction: column;
+        gap: 0;
+    }
 
-#privacy a {
-    color: #0e172c;
-    font-weight: bold;
-    text-decoration: none;
-}
+    fieldset.group .field {
+        margin-bottom: 1.25rem;
+    }
 
-#privacy a:hover {
-    text-decoration: underline;
-}
-
-.privacy h2 {
-    text-align: center;
-}
-
-.privacy p {
-    margin-bottom: 0.2em;
-}
-
-@media (max-width: 411px) {
     #white-background {
-        border-radius: 0;
+        padding: 1.5rem;
     }
+}
 
-    .error, .success {
-        margin-left: 10px;
-        margin-right: 10px;
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-4px);
     }
-
-    .field input[type="text"], .field input[type="email"], .field input[type="number"] {
-        width: 330px;
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
