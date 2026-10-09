@@ -1,5 +1,7 @@
 # 🌲 Cypress, do Zero à Nuvem ☁️
 
+[![End-to-end tests](https://github.com/SEU_USUARIO/cypress-do-zero-a-nuvem/actions/workflows/ci.yml/badge.svg)](https://github.com/SEU_USUARIO/cypress-do-zero-a-nuvem/actions/workflows/ci.yml)
+
 👋 Seja bem-vindo(a)!
 
 É muito bom tê-lo(a) aqui. Tenho certeza que você vai amar esse curso. ❤️

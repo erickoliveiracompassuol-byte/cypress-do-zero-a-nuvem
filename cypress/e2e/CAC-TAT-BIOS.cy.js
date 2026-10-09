@@ -125,12 +125,53 @@ it('marca cada tipo de atendimento', ()=> {
   })
 });
 
-it.only('marca ambos checkboxes, depois desmarca o último', () => {
+it('marca ambos checkboxes, depois desmarca o último', () => {
   cy.get('input[type="checkbox"]')
   .check()
   .should('be.checked')
   .last().uncheck()
   .should('not.be.checked');
 }); 
+
+it('seleciona um arquivo do computador', () => {
+  cy.get('input[type="file"]')
+    .selectFile('cypress/fixtures/example.json')
+    .should(input => {
+      expect(input[0].files[0].name).to.equal('example.json');
+    });
+});
+
+it('seleciona um arquivo simulando um drag and drop', () => {
+  cy.get('input[type="file"]')
+    .selectFile('cypress/fixtures/example.json', { action: 'drag-drop' })
+    .should(input => {
+      expect(input[0].files[0].name).to.equal('example.json');
+    });
+});
+it('seleciona um arquivo utilizando uma fixture para a qual foi dada um alias', () => {
+  cy.fixture('example.json').as('ErickBios');
+  cy.get('input[type="file"]')
+    .selectFile('@ErickBios')
+    .should(input => {
+      expect(input[0].files[0].name).to.equal('example.json');
+    });
+});
+
+it('verifica que a política de privacidade abre em outra aba sem a necessidade de um clique', () => {
+cy.contains('a', 'Política de Privacidade')
+.should('have.attr', 'href', 'privacy.html')
+.and('have.attr', 'target', '_blank');
+});
+
+it('acessa a página da política de privacidade removendo o target e então clicando no link', () => {
+  cy.contains('a', 'Política de Privacidade')
+  .invoke('removeAttr', 'target')
+  .click()
+  cy.contains('h1', 'CAC TAT - Política de Privacidade').should('be.visible')
   
+  cy.wait(3000) // Aguarda 3 segundos na página da política de privacidade
+  cy.go('back')
+  cy.get('#title').should('contain', 'CAC TAT') // Valida que voltou para a página inicial
+})
+
 });
