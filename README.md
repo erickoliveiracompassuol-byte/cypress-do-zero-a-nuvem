@@ -78,4 +78,10 @@ Certifique-se de ter instalado em sua máquina:
 
 ___
 
+## 🔄 Integração Contínua (CI) com GitHub Actions + +O repositório possui uma esteira automatizada configurada via GitHub Actions (.github/workflows/ci.yml): + +- Gatilho (Trigger): Executado automaticamente a cada push enviado para o repositório remoto. +- Ambiente: Máquina virtual ubuntu-22.04. +- Action Oficial: Utiliza a action oficial cypress-io/github-action@v6, que gerencia instalação de dependências, cache e execução dos testes. +- Integração com Cypress Cloud:
+
+Execução via script npm run test:cloud (cypress run --record).
+Autenticação gerenciada via GitHub Repository Secrets (CYPRESS_RECORD_KEY).
+Registro e monitoramento dos testes na nuvem com suporte a Test Replay, métricas e detecção de testes instáveis (flaky).
+
 Este é um curso da **Escola Talking About Testing**.
