@@ -85,3 +85,5 @@ Autenticação gerenciada via GitHub Repository Secrets (CYPRESS_RECORD_KEY).
 Registro e monitoramento dos testes na nuvem com suporte a Test Replay, métricas e detecção de testes instáveis (flaky).
 
 Este é um curso da **Escola Talking About Testing**.
+End 
+  
